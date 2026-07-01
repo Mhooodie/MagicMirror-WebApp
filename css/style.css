@@ -1,75 +1,90 @@
 body {
-    background-color: black;
-    color: white;
-    font-family: Arial, sans-serif;
-    margin: 0;
+  background-color: black;
+  color: white;
+  font-family: Arial, sans-serif;
+  margin: 0;
 }
 
 #app {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
+  width: 100vw;
+  height: 100vh;
+
+  display: grid;
+  grid-template-columns: 25% 1fr 30%;
+  grid-template-rows: 12% 1fr 20%;
+  gap: 1.5%;
+  padding: 1.5%;
+
+  box-sizing: border-box;
 }
 
 .widgets {
-    position: absolute;
-    /*background-color: aquamarine;*/
-    width: 25%;
-    height: 20%;
-    border-radius: 10px;
-    padding: 10px;
+  border-radius: 10px;
+  padding: 1%;
+  box-sizing: border-box;
 }
 
-#weather {
-    width: 30%;
-    height: 15%;
-    top: 1.5%;
-    right: 1.5%;
-} 
+#leftColumn {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 
 #clock {
-    height: 10%;
-    top: 1.5%;
-    left: 1.5%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;  /* left-aligned text */
-    padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 #clockDate {
-    font-size: 18px;
-    opacity: 0.7;
-    letter-spacing: 1px;
+  font-size: 18px;
+  opacity: 0.7;
+  letter-spacing: 1px;
+
+  padding-left: 2%;
+  white-space: pre-line;
 }
 
 #clockTime {
-    font-size: 60px;
-    font-weight: 300;
-    letter-spacing: 2px;
-    margin-top: 5px;
+  font-size: clamp(40px, 5vw, 60px);
+  font-weight: 300;
+  letter-spacing: 2px;
+
+  margin-top: 5px;
 }
 
 #dailyQuote {
-    width: 25%;
-    height: 8%;
-    top: 15%;
-    left: 1.5%;
+  align-self: start;
+  min-height: 8%;
+  padding-left: 3%;
+}
+
+#clock,
+#dailyQuote {
+  grid-column: auto;
+  grid-row: auto;
+}
+
+#weather {
+  grid-column: 3;
+  grid-row: 1;
 }
 
 #activity {
-    bottom: 1.5%;
-    left: 1.5%;
+  grid-column: 1;
+  grid-row: 3;
 }
 
 #calendar {
-    width: 35%;
-    bottom: 1.5%;
-    left: 31.5%;
+  grid-column: 2;
+  grid-row: 3;
 }
 
 #toDo {
-    bottom: 1.5%;
-    right: 1.5%;
+  grid-column: 3;
+  grid-row: 3;
 }
