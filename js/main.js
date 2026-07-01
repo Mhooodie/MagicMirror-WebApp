@@ -37,7 +37,14 @@ function loadQuote() {
 }
 
 // TODO: Weather bellow
+// const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1`; for geocode
 // https://open-meteo.com/en/docs
+async function geoCode() {
+    const city = "ROLLA"
+    const url = `https://geocoding-api.open-meteo.com/v1/search?
+    name=${encodeURIComponent(city)}&count=10&language=en&format=json`;
+    const res = await fetch(url);
+}
 
 digitalClock();
 setInterval(digitalClock, 1000);
