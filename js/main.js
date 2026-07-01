@@ -36,13 +36,8 @@ function loadQuote() {
         });
 }
 
-function loadWeather() {
-
-
-
-
-
-}
+// TODO: Weather bellow
+// https://open-meteo.com/en/docs
 
 digitalClock();
 setInterval(digitalClock, 1000);
