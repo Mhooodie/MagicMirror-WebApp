@@ -187,13 +187,17 @@ function pairWeatherCode(code) {
   return weatherText;
 }
 
-// Gets Lat/Long: Fetches from API
+// Gets Lat/Long: Fetches from API (Lat, Long)
 // TODO: Error Handling
 async function geoCode() {
   const city = "Rolla";
   document.getElementById("city").innerText = city;
   const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=10&language=en&format=json`;
   const res = await fetch(url);
+  if (!res.ok) {
+    console.error("Could not load geocode data");
+    return null;
+  }
   const data = await res.json();
   console.log("location");
   console.log(data);
@@ -202,10 +206,14 @@ async function geoCode() {
   return location;
 }
 
-// Top Right Weather: blahblahblah
+// Top Right Weather: Fetches from API (WeatherCode, Temp, Humidity)
 // TODO: Error Handling
 async function getWeather() {
   const location = await geoCode();
+  if (!location) {
+    console.error("Could not load location");
+    return;
+  }
   const lat = location.latitude;
   const lon = location.longitude;
   const timeZone = "America/Chicago";
@@ -222,16 +230,113 @@ async function getWeather() {
   console.log("Temperature: " + temperature);
   console.log("Humidity: " + humidity);
   console.log("Weather Code: " + weatherCode);
-  const weatherDesc = pairWeatherCode(weatherCode); // TODO: Basic setup for now / return png later with text
+  const weatherDesc = pairWeatherCode(weatherCode);
 
   document.getElementById("temp").innerText = temperature;
   document.getElementById("humidity").innerText = humidity;
   document.getElementById("weatherCode").innerText = weatherDesc;
 }
 
-getWeather();
-setInterval(getWeather, 900000); // 15 Minutes
+// Bottom Right Todo List: Fetches
+async function getTodo() {
+  const res = await fetch("data/todo.json"); // SWAP WITH API
+
+  if (!res.ok) {
+    console.error("Could not load todo");
+    return;
+  }
+
+  const data = await res.json();
+  console.log(data);
+
+  // Keep unfinished tasks
+  const todo = data.items.filter((items) => items.status == "needsAction");
+  const todoSort = todo.sort((a, b) => a.position.localeCompare(b.position));
+  console.log(todoSort);
+
+  todoListElement = document.getElementById("todoList");
+  todoListElement.innerHTML = "";
+
+  todoSort.forEach((task) => {
+    const listItem = document.createElement("li");
+    listItem.classList.add("todoItem");
+
+    const topLine = document.createElement("div");
+    topLine.classList.add("todoTopLine");
+
+    const circle = document.createElement("span");
+    circle.classList.add("todoCircle");
+
+    const title = document.createElement("span");
+    title.classList.add("todoTitle");
+    title.innerText = task.title;
+
+    const description = document.createElement("div");
+    description.classList.add("todoDescription");
+    description.innerText = task.notes || task.title;
+
+    topLine.appendChild(circle);
+    topLine.appendChild(title);
+
+    listItem.appendChild(topLine);
+    listItem.appendChild(description);
+
+    todoListElement.appendChild(listItem);
+  });
+}
+
+async function getCalendar() {
+  const res = await fetch("data/calendar.json");
+  if (!res.ok) {
+    console.error("Could not load calendar");
+    return;
+  }
+  const data = await res.json();
+  console.log(data);
+  // Getting Date For Filter Check
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  const formattedDate = `${year}-${month}-${day}`;
+  console.log(formattedDate);
+
+  const todayItem = items.filter((days) => start.dateTime.search());
+  //your schedule
+  // ----------------
+  // 9 AM --- Task (M || H || L)
+}
+
+// TODO: Voice thing for later
+function updateNow() {
+  // ----- Mostly this function holds notes for voice integration -----
+  // Voice activated later
+  // how many times have I been active today | this week | this month | this year
+  // Give option ALL | Weather | Quote | Todo or mix n match?
+  // something silly - maybe say something activate then a gif and music pops up or something?
+  // vocalize quotes
+  // AI integration
+  // what am I doing next monday, this week, maybe tie the color I set things on my calendaar to importants
+  // add to calendar etc etc
+  // spotify???
+  getWeather();
+  loadQuote();
+  getTodo();
+}
+
+// add garmin api here
+
 digitalClock();
 setInterval(digitalClock, 1000); // Seconds
+
+getTodo();
+setInterval(getTodo, 600000); // 10 Minutes
+
+getWeather();
+setInterval(getWeather, 900000); // 15 Minutes
+
+getCalendar();
+setInterval(getCalendar, 900000); // 15 Minutes
+
 loadQuote();
 setInterval(loadQuote, 14400000); // 4 Hours

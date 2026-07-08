@@ -26,25 +26,30 @@
           <span id="city"></span>
           <span>Weather</span>
         </div>
-
         <div class="weatherMain">
           <img id="weatherImg" alt="Weather icon" />
-
           <div class="weatherText">
             <div id="temp"></div>
             <div id="weatherCode"></div>
           </div>
         </div>
-
         <div class="weatherDetails">
           <span>Humidity</span>
           <span id="humidity"></span>
         </div>
       </div>
-
+      <!--Activity-->
       <div id="activity" class="widgets">activity</div>
-      <div id="calendar" class="widgets">calendar</div>
-      <div id="toDo" class="widgets">todo</div>
+      <!--Calendar-->
+      <div id="calendar" class="widgets">
+        <div class="calendarHeader">Calendar</div>
+        <div id="calendarList"></div>
+      </div>
+      <!--Todo-->
+      <div id="toDo" class="widgets">
+        <div class="todoHeader">Tasks</div>
+        <ul id="todoList"></ul>
+      </div>
     </div>
 
     <script src="js/main.js"></script>
