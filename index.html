@@ -1,33 +1,52 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>MagicMirror</title>
-        <link rel="stylesheet" href="css/style.css">
-    </head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MagicMirror</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
 
-    <body>
-        <div id="app">
-            
-            <div id="leftColumn">
-                <div id="clock" class="widgets">
-                    <div id="clockTime"></div>
-                    <div id="clockDate"></div>
-                </div>
-
-                <div id="dailyQuote" class="widgets">
-                    <div id="quoteText"></div>
-                </div>
-            </div>
-
-            <div id="weather" class="widgets">weather</div>
-
-            <div id="activity" class="widgets">activity</div>
-            <div id="calendar" class="widgets">calendar</div>
-            <div id="toDo" class="widgets">todo</div>
+  <body>
+    <div id="app">
+      <div id="leftColumn">
+        <!--Clock-->
+        <div id="clock" class="widgets">
+          <div id="clockTime"></div>
+          <div id="clockDate"></div>
+        </div>
+        <!--Quote-->
+        <div id="dailyQuote" class="widgets">
+          <div id="quoteText"></div>
+        </div>
+      </div>
+      <!--Weather-->
+      <div id="weather" class="widgets">
+        <div class="weatherHeader">
+          <span id="city"></span>
+          <span>Weather</span>
         </div>
 
-        <script src="js/main.js"></script>
-    </body>
+        <div class="weatherMain">
+          <img id="weatherImg" alt="Weather icon" />
+
+          <div class="weatherText">
+            <div id="temp"></div>
+            <div id="weatherCode"></div>
+          </div>
+        </div>
+
+        <div class="weatherDetails">
+          <span>Humidity</span>
+          <span id="humidity"></span>
+        </div>
+      </div>
+
+      <div id="activity" class="widgets">activity</div>
+      <div id="calendar" class="widgets">calendar</div>
+      <div id="toDo" class="widgets">todo</div>
+    </div>
+
+    <script src="js/main.js"></script>
+  </body>
 </html>
