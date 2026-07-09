@@ -299,9 +299,12 @@ async function getCalendar() {
   const month = String(now.getMonth() + 1).padStart(2, "0");
   const day = String(now.getDate()).padStart(2, "0");
   const formattedDate = `${year}-${month}-${day}`;
-  console.log(formattedDate);
+  console.log("Today:", formattedDate);
 
-  const todayItem = items.filter((days) => start.dateTime.search());
+  const todayItem = data.items.filter(
+    (days) => days.start.dateTime.search(formattedDate) !== -1,
+  );
+  console.log(todayItem);
   //your schedule
   // ----------------
   // 9 AM --- Task (M || H || L)
